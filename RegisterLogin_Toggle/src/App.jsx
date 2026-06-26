@@ -3,7 +3,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 
 const App = () => {
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(false);
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e]">
       {/* {toggle ? (
