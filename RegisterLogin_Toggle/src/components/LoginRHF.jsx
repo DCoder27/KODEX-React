@@ -1,23 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
+const LoginRHF = ({ setToggle }) => {
+  const { register, handleSubmit, reset } = useForm();
 
-const Login = ({ setToggle }) => {
-  const [loginFormValue, setLoginFormValue] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLoginFormValue({ ...loginFormValue, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(loginFormValue);
-    setLoginFormValue({
-      email: "",
-      password: "",
-    });
+  const onSubmit = (data) => {
+    console.log("Form Data => ", data);
+    reset();
   };
 
   return (
@@ -26,17 +14,16 @@ const Login = ({ setToggle }) => {
         Login
       </h2>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <div>
           <label className="mb-1 block text-sm font-medium text-gray-700">
             Email
           </label>
           <input
             name="email"
-            value={loginFormValue.email}
+            {...register("email")}
             type="email"
             placeholder="john@example.com"
-            onChange={handleChange}
             className="w-full rounded border-2 px-3 py-2 outline-none focus:border-blue-500"
           />
         </div>
@@ -47,10 +34,9 @@ const Login = ({ setToggle }) => {
           </label>
           <input
             name="password"
-            value={loginFormValue.password}
+            {...register("password")}
             type="password"
             placeholder="Enter password"
-            onChange={handleChange}
             className="w-full rounded border-2 px-3 py-2 outline-none focus:border-blue-500"
           />
         </div>
@@ -76,4 +62,4 @@ const Login = ({ setToggle }) => {
   );
 };
 
-export default Login;
+export default LoginRHF;

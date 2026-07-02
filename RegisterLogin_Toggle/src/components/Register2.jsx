@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
-const Register = ({ setToggle }) => {
-  const [registerFormValue, setRisterFormValue] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setRisterFormValue({ ...registerFormValue, [name]: value });
-    console.log(e.target.name);
+const Register2 = ({ setToggle }) => {
+  let data = {};
+  let inputRef = useRef({});
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { current } = inputRef;
+    data = {
+      ...data,
+      name: current.name.value,
+      email: current.email.value,
+      password: current.password.value,
+    };
+    console.log("Form Data => ", data);
   };
 
   return (
@@ -19,20 +21,16 @@ const Register = ({ setToggle }) => {
         Create Account
       </h2>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          console.log("Form Data => ", registerFormValue);
-        }}
-        className="flex flex-col gap-4"
-      >
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
           <label className="mb-1 block text-sm font-medium text-gray-700">
             Full Name
           </label>
           <input
+            ref={(e) => {
+              inputRef.current.name = e;
+            }}
             name="name"
-            onChange={handleChange}
             type="text"
             placeholder="John Doe"
             className="w-full rounded border-2 px-3 py-2 outline-none focus:border-blue-500"
@@ -44,8 +42,10 @@ const Register = ({ setToggle }) => {
             Email
           </label>
           <input
+            ref={(e) => {
+              inputRef.current.email = e;
+            }}
             name="email"
-            onChange={handleChange}
             type="email"
             placeholder="john@example.com"
             className="w-full rounded border-2 px-3 py-2 outline-none focus:border-blue-500"
@@ -57,8 +57,10 @@ const Register = ({ setToggle }) => {
             Password
           </label>
           <input
+            ref={(e) => {
+              inputRef.current.password = e;
+            }}
             name="password"
-            onChange={handleChange}
             type="password"
             placeholder="Enter password"
             className="w-full rounded border-2 px-3 py-2 outline-none focus:border-blue-500"
@@ -86,4 +88,4 @@ const Register = ({ setToggle }) => {
   );
 };
 
-export default Register;
+export default Register2;

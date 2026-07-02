@@ -1,6 +1,9 @@
 import React, { Activity, useState } from "react";
-import Register from "./components/Register";
+import Register1 from "./components/Register1";
 import Login from "./components/Login";
+import Register2 from "./components/Register2";
+import Login2 from "./components/Login2";
+import LoginRHF from "./components/LoginRHF";
 
 const App = () => {
   const [toggle, setToggle] = useState(false);
@@ -13,10 +16,10 @@ const App = () => {
       )} */}
 
       <Activity mode={toggle ? "visible" : "hidden"}>
-        <Register setToggle={setToggle} />
+        <Register2 setToggle={setToggle} />
       </Activity>
       <Activity mode={!toggle ? "visible" : "hidden"}>
-        <Login setToggle={setToggle} />
+        <LoginRHF setToggle={setToggle} />
       </Activity>
     </div>
   );

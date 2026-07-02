@@ -1,23 +1,17 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
-const Login = ({ setToggle }) => {
-  const [loginFormValue, setLoginFormValue] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLoginFormValue({ ...loginFormValue, [name]: value });
-  };
+const Login2 = ({ setToggle }) => {
+  let userData = {};
+  let inputRef = useRef({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(loginFormValue);
-    setLoginFormValue({
-      email: "",
-      password: "",
-    });
+    userData = {
+        ...userData,
+        email: inputRef.current.email.value,
+        password: inputRef.current.password.value
+    }
+    console.log("User Lodin Data:=> ",userData);
   };
 
   return (
@@ -32,11 +26,12 @@ const Login = ({ setToggle }) => {
             Email
           </label>
           <input
+            ref={(e) => {
+              inputRef.current.email = e;
+            }}
             name="email"
-            value={loginFormValue.email}
             type="email"
             placeholder="john@example.com"
-            onChange={handleChange}
             className="w-full rounded border-2 px-3 py-2 outline-none focus:border-blue-500"
           />
         </div>
@@ -46,11 +41,12 @@ const Login = ({ setToggle }) => {
             Password
           </label>
           <input
+            ref={(e) => {
+              inputRef.current.password = e;
+            }}
             name="password"
-            value={loginFormValue.password}
             type="password"
             placeholder="Enter password"
-            onChange={handleChange}
             className="w-full rounded border-2 px-3 py-2 outline-none focus:border-blue-500"
           />
         </div>
@@ -76,4 +72,4 @@ const Login = ({ setToggle }) => {
   );
 };
 
-export default Login;
+export default Login2;
